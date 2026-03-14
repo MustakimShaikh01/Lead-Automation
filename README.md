@@ -1,19 +1,15 @@
 <div align="center">
-  <img src="https://img.shields.io/badge/Private_LLM-Ready-58a6ff?style=for-the-badge&logo=openai&logoColor=white" alt="Private LLM" />
-  <img src="https://img.shields.io/badge/React_&_GSAP-Interactive-bc8cff?style=for-the-badge&logo=react&logoColor=white" alt="Interactive Frontend" />
+  <img src="https://img.shields.io/badge/Open_Source-Playground-58a6ff?style=for-the-badge&logo=opensourcehardware&logoColor=white" alt="Open Source" />
+  <img src="https://img.shields.io/badge/Make_&_Zapier-Alternative-bc8cff?style=for-the-badge&logo=zapier&logoColor=white" alt="Zapier Alternative" />
   <img src="https://img.shields.io/badge/Status-Production_Ready-3fb950?style=for-the-badge&logo=rocket&logoColor=white" alt="Production Ready" />
   
   <br />
   <br />
 
-  <h1 align="center">⚡ Autoify: The Autonomous AI Agency & Lead Automation Infrastructure</h1>
+  <h1 align="center">⚡ Autoify: The AI Automation Marketplace & Playground</h1>
 
   <p align="center">
-    <strong>A high-ticket SaaS marketplace & portfolio built for Generative AI Engineers to license templates, automate workflows, and deploy private LLMs.</strong>
-  </p>
-
-  <p align="center">
-    Built & Maintained with ❤️ by <strong>Mustakim Shaikh</strong>
+    <strong>An open-source, deployable B2B playground designed to replace expensive Zapier/Make subscriptions. Discover premium templates, connect services, and architect your own enterprise automations at the absolute lowest cost.</strong>
   </p>
 </div>
 
@@ -21,125 +17,81 @@
 
 ## 🚀 Overview
 
-**Autoify** is an enterprise-grade Lead Automation and AI Services platform. It completely replaces the need for tools like Zapier or Make by acting as an autonomous backend hub that instantly intercepts leads, syncs them to databases, and dispatches automated, personalized HTML emails. 
+**Autoify** is not just a landing page; it is a fully-functional, lowest-cost **Open Source Automation Architecture**. It acts as your autonomous backend hub to intercept webhooks, sync data accurately across platforms (CRM/Databases/LLMs), and dispatch custom logic—completely bypassing the monthly subscription fees of traditional automation builders.
 
-Simultaneously, it serves as a **highly interactive Generative AI Engineer portfolio** designed with **Three.js** and **GSAP**. The dark-matter glassmorphic aesthetic is engineered specifically to convert enterprise clients searching for Private LLMs, RAG Architectures, and Multi-Agent Orchestration.
+The platform is engineered to be **instantly deployed on Render.com** so you can scale a fully operational Automation Business, instantly granting users access to customized AI environments, Voice outreach bots, and Lead data pipelines.
 
 ---
 
-## 🔥 Key Features
+## 🔥 Platform Features
 
-*   **🌌 Premium 3D Interactive Design:** A breathtaking glassmorphic UI overlaying a living Three.js oceanic background, brought to life via GSAP scroll-triggers. It feels extremely expensive.
-*   **📧 Universal Email Engine:** Dynamically switches between an `Ethereal.email` test environment (saving links to the terminal natively so you never spam your personal inbox during dev) and an actual `Google SMTP` server when deployed to production.
-*   **🗄️ Zero-Config Database:** Built-in `SQLite3` engine generates and manages your `leads.db` automatically on startup.
-*   **🤖 "Trending Automation" Visualizers:** Custom CSS flowchart diagrams demonstrating the architectural logic of AI Voice Bots, Tier-1 AI Ticket Support, and Secure LLM integrations.
-*   **💰 Automated Monetization:** Includes a multi-tier subscription engine (Basic, Pro, Elite LLM) tied natively to the backend interception engine.
-*   **🚀 Render-Ready Launch:** Seamlessly switch between testing to production. Full `.env` and `.gitignore` integration to protect your security keys inherently.
+*   **🌌 High-Convert Marketplace UI:** Built on pure HTML5 + Three.js + GSAP, providing an interactive, glassmorphic marketplace designed to convert prospects searching for automation integrations.
+*   **🛒 Trending AI Templates:** Pre-configured architecture for Lead Capture pipelines, Autonomous AI Voice Agents, and Zendesk/Support RAG integrations. Built directly into the platform logic.
+*   **⚙️ "Make/Zapier" Open Source Alternative:** An API playground built on Node.js + Express. Accepts payloads, mutates data, and connects systems securely without volume limits.
+*   **📈 Built-In Subscription Scalability:**
+    *   *Starter:* Get 1 Template / Create 1 custom flow. 
+    *   *Pro:* Get 2 Templates / Create 3 custom flows.
+    *   *Enterprise:* Get 5 Templates / Create 5 custom flows + access fully Private LLMs.
+*   **📧 Universal Email Engine:** Dynamically switches between an `Ethereal.email` local testing sandbox and robust `Google SMTP` in production. 
 
 ---
 
 ## 🛠️ Technology Stack
 
-| Architecture / Component | Technology Executed |
+| Ecosystem Sector | Core Technology |
 | :--- | :--- |
-| **Frontend UI/UX** | Pure HTML5, Vanilla CSS3, Vanta.js (Three.js), GSAP |
-| **Backend API** | Node.js, Express.js |
-| **Email Subsystem** | Nodemailer (Ethereal for Dev / Gmail SMTP for Prod) |
-| **Database** | SQLite3 |
-| **Environment** | Dotenv, cross-env logic |
-| **Security** | Process.env architecture |
+| **Frontend Playground** | Vanta.js (Three.js), GSAP, Vanilla CSS3 |
+| **Automation Engine** | Node.js, Express.js |
+| **Email Subsystem** | Nodemailer (Ethereal + Google SMTP) |
+| **Data Persistence** | Zero-config SQLite3 |
+| **Environment** | Dotenv logic |
 
 ---
 
-## 📦 Getting Started & Installation
+## 📦 Local Workspace Setup
 
-You can get this massive AI infrastructure running locally on your machine in under 60 seconds. 
+You can run the entire Autoify Playground locally on your machine exactly as it would function in the real world:
 
-### 1. Clone the Repository
+### 1. Clone the Architecture
 ```bash
 git clone https://github.com/MustakimShaikh01/Lead-Automation.git
 cd Lead-Automation
 ```
 
-### 2. Install Dependencies
+### 2. Install Native Dependencies
 ```bash
 npm install
 ```
 
-### 3. Setup Development Environment
-By default, the application runs entirely locally utilizing Ethereal for testing. However, to deploy it into the real world, create a `.env` file in the root directory:
+### 3. Initialize `.env` Keys (For Production)
+The app runs safely testing logic locally out-of-the-box. To actually connect out integrations securely, map a `.env`:
 
 ```env
 NODE_ENV=development
-EMAIL_USER=your_gmail_address@gmail.com
+EMAIL_USER=your_business_address@gmail.com
 EMAIL_PASS=your_16_digit_app_password
-ADMIN_EMAIL=your_admin_inbox@example.com
+ADMIN_EMAIL=your_admin_dashboard@example.com
 ```
 
-### 4. Ignite the Server
+### 4. Ignite the Playground
 ```bash
 npm start
 ```
-*The server will boot up at `http://localhost:3000`. Navigate there to interact with the Three.js ecosystem and test the lead automation form at the bottom of the page!*
+*The Autoify server logic is now actively listening on `http://localhost:3000`.* 
 
 ---
 
-## 📡 Testing the Ethereal Email System Locally
+## ☁️ Deploying to Render (For Free Demos & Business Setup)
 
-If you submit a lead through the frontend while `NODE_ENV` is set to `development` (or missing), the system intercepts it and prevents you from being charged or flagged by Gmail. 
+This marketplace is explicitly structured to act as your core Business Engine hosted on Render.com:
 
-Open your terminal. You will see a magical hyperlink generated:
-```
---- 🚀 New Subscription Request ---
-Name:    Elon
-Email:   elon@tesla.com
-Plan:    Enterprise LLM Build
-
-✅ User saved securely to DB.
-[TEST EMAIL ACCOUNT INITIATED]
-
-📨 Email successfully sent to: elon@tesla.com
-👀 PREVIEW INBOX LINK: https://ethereal.email/message/xxxxx
-```
-**Click the Ethereal link directly in your terminal** to view the dynamically generated, heavy HTML welcome-emails exactly as the client would receive them.
-
----
-
-## ☁️ Deploying to Render.com
-
-This project is explicitly engineered to be pushed to Render for free hosting.
-
-1. Connect your GitHub repository to **Render.com** (Select *New Web Service*).
-2. Set the Build Command to `npm install` and the Start Command to `npm start`.
-3. Under **Environment Variables**, you must add:
-   *   `NODE_ENV` (Set strictly to: `production`)
+1. Push this repository to your GitHub account (this codebase comes pre-configured with a `.gitignore`).
+2. Navigate to **Render.com** > Connect GitHub > Select **New Web Service**.
+3. Set Build Command: `npm install` | Start Command: `npm start`.
+4. Inject the `.env` Variables under "Environment":
+   *   `NODE_ENV` = `production`
    *   `EMAIL_USER` 
-   *   `EMAIL_PASS` (MUST be a Google App Password, not your standard login)
+   *   `EMAIL_PASS`
    *   `ADMIN_EMAIL`
 
-As soon as Render boots, the server detects the `production` flag and permanently overrides the Ethereal test engine, replacing it with the real SMTP server. You are now live.
-
----
-
-## 👨‍💻 About Minimum Viable Architecture 
-
-> **Designed by Mustakim Shaikh | Generative AI Engineer**
-> *MCA Graduate (8.02 CGPA) | RAG Architect | Multi-Agent Specialist*
-> 
-> "I built this open-source template to give Generative AI engineers a production-grade UI to sell high-ticket enterprise services. The combination of Three.js GSAP interactions with a brutally efficient Express/SQLite backend creates an asset that converts."
-
-<div align="center">
-  <a href="https://github.com/MustakimShaikh01">
-    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-  </a>
-  <a href="https://linkedin.com/in/mustakim-sh">
-    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
-  </a>
-  <a href="mailto:mustakim.shaikh.prof@gmail.com">
-    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
-  </a>
-</div>
-
----
-
-<p align="center"><i>If this architecture helped you scale your agency or secure your next enterprise AI role, <b>please leave a ⭐️ on the repository!</b></i></p>
+Once Render completes the build, the engine recognizes the `production` state and transitions from sandbox email routing to pure SMTP execution. Your Autoify Marketplace is officially live.
