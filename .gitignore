@@ -1,4 +1,4 @@
-node_modules/
-.env
 leads.db
 .DS_Store
+node_modules
+.env
