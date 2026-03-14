@@ -8,12 +8,32 @@ require('dotenv').config();
 const { sendEmail } = require('./emailService');
 
 const compression = require('compression');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const xss = require('xss-clean');
+const hpp = require('hpp');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// === SECURITY STACK (Enterprise Grade) ===
+app.use(helmet({
+  contentSecurityPolicy: false, // Set to false to allow CDN scripts like Vanta/Three.js
+}));
+app.use(xss()); // Sanitize Data
+app.use(hpp()); // Prevent Parameter Pollution
+app.disable('x-powered-by'); // Hide server info
+
+// Rate Limiting: Prevent DDoS/Bot Spam (Max 10 leads per 15 mins per IP)
+const leadLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  message: { error: 'Too many requests. Please try again later.' }
+});
+app.use('/api/lead', leadLimiter);
+
 // Performance Middleware
-app.use(compression()); // Gzip all responses
+app.use(compression());
 app.use(cors());
 app.use(express.json());
 

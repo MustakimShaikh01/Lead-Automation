@@ -299,15 +299,27 @@
     .toast.show { bottom: 30px; }
 
     @media (max-width: 900px) {
-      .hero h1 { font-size: 3.5rem; }
-      .grid-2, .grid-3 { grid-template-columns: 1fr; }
-      nav { display: none; }
-      .os-banner { padding: 2.5rem; }
+      .hero h1 { font-size: 3.2rem; }
+      .hero p { font-size: 1.1rem; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 1.5rem; }
+      header { padding: 1rem 0; }
+      .header-content { flex-direction: row; justify-content: space-between; }
+      nav { display: none; } /* Standard for mobile MVP, though a menu can be added */
+      .os-banner { padding: 2.5rem 1.5rem; }
+      .section-title { font-size: 2.4rem; }
+      .pricing-tier { padding: 2rem 1.5rem; }
+      .form-wrapper { padding: 2rem 1.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2.8rem; }
+      .cta-btn { width: 100%; text-align: center; }
+      .hero div[style*="flex"] { flex-direction: column; }
     }
   </style>
 </head>
 
-<body>
+<body class="loading">
   <div id="preloader"><div class="loader-pulse"></div></div>
 
   <div id="vanta-canvas"></div>
@@ -316,12 +328,12 @@
   <header id="navbar">
     <div class="container header-content">
       <a href="#" class="logo">⚡ Autoify<span>.</span></a>
-      <nav>
+      <nav id="main-nav">
         <a href="#playground">Playground</a>
         <a href="#templates">Templates</a>
         <a href="#pricing">Pricing</a>
       </nav>
-      <a href="#contact" class="cta-btn primary" style="padding: 0.6rem 1.5rem;">Launch Dashboard</a>
+      <a href="#contact" class="cta-btn primary" style="padding: 0.6rem 1.5rem; font-size: 0.85rem;">Get Access</a>
     </div>
   </header>
 
@@ -560,13 +572,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
   <script>
-    // 1. Vanta.js Deep Dark Matter Atmosphere
+    // 1. Vanta.js Deep Dark Matter Atmosphere - Mobile Optimized
+    const isMobile = window.innerWidth < 768;
     const vantaEffect = VANTA.WAVES({
       el: "#vanta-canvas",
-      mouseControls: true, touchControls: true, gyroControls: false,
-      minHeight: 200.00, minWidth: 200.00, scale: 1.00, scaleMobile: 1.00,
-      color: 0x05080f, shininess: 35.00, waveHeight: 18.00, waveSpeed: 0.55, zoom: 0.85,
-      // Failsafe: Remove loader instantly on init
+      mouseControls: !isMobile, touchControls: !isMobile, gyroControls: false,
+      minHeight: 200.00, minWidth: 200.00,
+      scale: 1.00, scaleMobile: 1.00,
+      color: 0x05080f,
+      shininess: isMobile ? 15.00 : 35.00,
+      waveHeight: isMobile ? 10.00 : 18.00,
+      waveSpeed: isMobile ? 0.35 : 0.55,
+      zoom: isMobile ? 1.0 : 0.85,
       onInit: () => { document.body.classList.add('loaded'); }
     });
 
