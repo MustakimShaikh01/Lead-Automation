@@ -7,15 +7,21 @@ require('dotenv').config();
 // Now using our universal sender that switches between test/prod automatically
 const { sendEmail } = require('./emailService');
 
+const compression = require('compression');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
+// Performance Middleware
+app.use(compression()); // Gzip all responses
 app.use(cors());
 app.use(express.json());
 
-// Serve static frontend files from 'client' folder
-app.use(express.static(path.join(__dirname, '../client')));
+// Optimized Static Serving with Caching
+const cacheTime = 31536000000; // 1 year for assets
+app.use('/assets', express.static(path.join(__dirname, '../client/assets'), { maxAge: cacheTime }));
+app.use(express.static(path.join(__dirname, '../client'), { maxAge: 86400000 })); // 1 day for HTML/JS
+
 
 // POST endpoint for new leads
 app.post('/api/lead', (req, res) => {
