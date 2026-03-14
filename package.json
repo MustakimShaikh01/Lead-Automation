@@ -1,20 +1,29 @@
 {
   "name": "lead-automation-demo",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "Lead automation demo with email notifications",
+  "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",
-    "dev": "nodemon server/index.js"
+    "dev": "nodemon server/index.js",
+    "postinstall": "npm rebuild sqlite3 --build-from-source"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "lead-automation",
+    "express",
+    "email",
+    "sqlite"
+  ],
+  "author": "Mustakim Shaikh",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "nodemailer": "^8.0.2",
     "sqlite3": "^6.0.1"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
