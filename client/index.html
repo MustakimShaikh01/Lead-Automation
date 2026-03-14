@@ -5,26 +5,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- SEO friendly Meta Tags -->
-  <title>Autoify | Private LLMs, Automation & Enterprise AI Solutions</title>
-  <meta name="description" content="Mustakim Shaikh - Generative AI Engineer. Specializing in Private LLMs, RAG pipelines, Secure AI, and Business Automation. Get advanced automation templates and AI services.">
-  <meta name="keywords" content="Mustakim Shaikh, AI Engineer, Private LLM, Secure LLM, RAG pipeline, AI Automation, Zapier alternative, Generative AI">
+  <!-- Enhanced SEO & Meta Tags -->
+  <title>Mustakim Shaikh | Generative AI Engineer & Automation Architect</title>
+  <meta name="description" content="Portfolio of Mustakim Shaikh, Generative AI Engineer. Specializing in autonomous AI agents, private LLMs, and enterprise workflow automation. Build secure AI.">
+  <meta name="keywords" content="Mustakim Shaikh, AI Engineer, Generative AI, RAG architecture, LLM automation, Multi-Agent Systems, Fastapi, React, Zapier alternative">
+  <meta name="author" content="Mustakim Shaikh">
   <meta name="robots" content="index, follow">
+
+  <!-- Open Graph for Social Media -->
+  <meta property="og:title" content="Mustakim Shaikh | Private AI & Automation">
+  <meta property="og:description" content="Transforming businesses with autonomous AI agents and secure local LLMs.">
+  <meta property="og:type" content="website">
   
   <style>
     :root {
       --bg-color: #0d1117;
-      --bg-secondary: #161b22;
       --primary: #58a6ff;
       --primary-hover: #3182ce;
       --accent: #bc8cff;
       --text: #c9d1d9;
       --text-muted: #8b949e;
-      --border: rgba(255, 255, 255, 0.1);
-      --card-bg: rgba(22, 27, 34, 0.6);
+      --border: rgba(255, 255, 255, 0.08);
+      --card-bg: rgba(22, 27, 34, 0.4);
       --success: #3fb950;
       --warning: #d29922;
-      --danger: #f85149;
     }
 
     * {
@@ -39,561 +43,292 @@
       color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
-      scroll-behavior: smooth;
     }
 
-    /* Ambient blobs for background */
-    .blob {
-      position: absolute;
-      filter: blur(100px);
-      z-index: 0;
-      opacity: 0.15;
-      border-radius: 50%;
-      animation: float 15s infinite ease-in-out alternate;
+    #vanta-canvas {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: -1;
+      opacity: 0.8;
+      pointer-events: none; /* Allows scrolling over it */
     }
-
-    @keyframes float {
-      0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(-30px) scale(1.1); }
+    
+    /* Overlay to make text readable */
+    .bg-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: linear-gradient(to bottom, rgba(13, 17, 23, 0.5) 0%, rgba(13, 17, 23, 0.95) 100%);
+      z-index: -1;
+      pointer-events: none;
     }
-
-    .blob-1 { top: -5%; left: -10%; width: 500px; height: 500px; background: var(--primary); }
-    .blob-2 { top: 30%; right: -5%; width: 400px; height: 400px; background: var(--accent); }
-    .blob-3 { bottom: 10%; left: 20%; width: 600px; height: 600px; background: #2ea043; opacity: 0.1; }
-    .blob-4 { top: 60%; left: -5%; width: 350px; height: 350px; background: var(--warning); opacity: 0.1; }
 
     .container {
-      max-width: 1200px;
+      max-width: 1250px;
       margin: 0 auto;
       padding: 0 2rem;
       position: relative;
       z-index: 10;
     }
 
+    /* Glass Header */
     header {
       padding: 1.5rem 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
+      position: fixed;
+      width: 100%;
       top: 0;
-      background: rgba(13, 17, 23, 0.85);
-      backdrop-filter: blur(15px);
+      background: rgba(13, 17, 23, 0.5);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       z-index: 100;
       border-bottom: 1px solid var(--border);
+      transition: all 0.3s ease;
     }
+
+    .header-content { display: flex; justify-content: space-between; align-items: center; }
 
     .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      text-decoration: none;
+      font-size: 1.4rem; font-weight: 800; color: #fff; text-decoration: none;
+      letter-spacing: -0.5px;
     }
+    .logo span { color: var(--accent); }
 
-    .logo span {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    nav { display: flex; gap: 2rem; }
+    nav { display: flex; gap: 2.5rem; }
     nav a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-      font-size: 0.95rem;
+      color: var(--text-muted); text-decoration: none; font-weight: 500;
+      font-size: 0.9rem; transition: color 0.3s; position: relative;
+    }
+    nav a::after {
+      content: ''; position: absolute; width: 0; height: 2px;
+      bottom: -4px; left: 0; background: var(--primary); transition: width 0.3s;
     }
     nav a:hover { color: #fff; }
+    nav a:hover::after { width: 100%; }
 
     /* Buttons */
     .cta-btn {
-      display: inline-block;
-      background: var(--primary);
-      color: #fff;
-      padding: 0.8rem 2rem;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 20px -5px rgba(88, 166, 255, 0.4);
-      cursor: pointer;
-      border: none;
+      display: inline-block; background: #fff; color: #000;
+      padding: 0.8rem 2.2rem; border-radius: 30px; text-decoration: none;
+      font-weight: 600; font-size: 0.95rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer; border: none;
     }
     .cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 25px -5px rgba(88, 166, 255, 0.5);
-      background: var(--primary-hover);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 15px 30px -10px rgba(255, 255, 255, 0.4);
     }
-    .cta-btn.secondary {
-      background: transparent;
-      border: 1px solid var(--border);
-      box-shadow: none;
-      margin-left: 1rem;
-    }
-    .cta-btn.secondary:hover {
-      border-color: var(--text-muted);
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .section-title {
-      text-align: center; font-size: 2.5rem; margin-bottom: 1rem; color: #fff;
-    }
-    .section-subtitle {
-      text-align: center; color: var(--text-muted); margin-bottom: 4rem;
-      font-size: 1.1rem; max-width: 650px; margin-left: auto; margin-right: auto;
-    }
-
-    /* Hero Section */
-    .hero { text-align: center; padding: 7rem 0 5rem; animation: fadeIn 1s ease-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .hero h1 { font-size: 4rem; font-weight: 800; line-height: 1.2; margin-bottom: 1.5rem; color: #fff; }
-    .hero h1 .highlight {
-      background: linear-gradient(to right, var(--primary), var(--accent));
-      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 2.5rem; }
     
-    /* Stats Profile Bar */
-    .profile-stats {
-      display: flex; justify-content: center; gap: 3rem; margin-top: 4rem;
-      border-top: 1px solid var(--border); padding-top: 3rem; flex-wrap: wrap;
+    .cta-btn.primary { background: var(--primary); color: #fff; }
+    .cta-btn.primary:hover { box-shadow: 0 15px 30px -10px rgba(88, 166, 255, 0.5); }
+    
+    .cta-btn.outline {
+      background: transparent; border: 1px solid var(--border); color: #fff;
     }
-    .stat { text-align: center; }
-    .stat h4 { font-size: 2rem; color: #fff; margin-bottom: 0.2rem; }
-    .stat p { color: var(--accent); font-weight: 500; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;}
+    .cta-btn.outline:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
 
-    /* Grid layouts */
-    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2.5rem; }
-    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+    /* Hero */
+    .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 5rem; }
+    .hero-content { max-width: 800px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(188, 140, 255, 0.1); border: 1px solid rgba(188, 140, 255, 0.2);
+      color: var(--accent); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem;
+      font-weight: 600; margin-bottom: 1.5rem; letter-spacing: 0.5px;
+    }
+    .status-dot { width: 8px; height: 8px; background: var(--success); border-radius: 50%; box-shadow: 0 0 10px var(--success); animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+
+    .hero h1 { font-size: 5.5rem; font-weight: 800; line-height: 1.05; margin-bottom: 1.5rem; color: #fff; letter-spacing: -2px; }
+    .hero p { font-size: 1.3rem; color: var(--text-muted); max-width: 600px; margin-bottom: 2.5rem; font-weight: 400;}
+
+    /* GSAP Reveal Class */
+    .reveal { opacity: 0; transform: translateY(40px); }
+
+    /* Sections */
+    section { padding: 8rem 0; position: relative; }
+    .section-header { margin-bottom: 4rem; max-width: 700px; }
+    .section-title { font-size: 3rem; font-weight: 700; color: #fff; letter-spacing: -1px; margin-bottom: 1rem; }
+    .section-subtitle { color: var(--text-muted); font-size: 1.15rem; }
+
+    /* Grids */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
 
     /* Cards */
     .card {
-      background: var(--card-bg); backdrop-filter: blur(12px); border: 1px solid var(--border);
-      border-radius: 20px; padding: 2.5rem; transition: all 0.3s ease; height: 100%;
+      background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border); border-radius: 24px; padding: 3rem;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative; overflow: hidden;
     }
-    .card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+    /* Magnetic hover effect simulation */
+    .card:hover { transform: translateY(-10px) scale(1.02); border-color: rgba(255,255,255,0.2); background: rgba(30, 36, 44, 0.6); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
+    
+    .card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); opacity: 0; transition: opacity 0.5s;
+    }
+    .card:hover::before { opacity: 1; }
+
     .icon-box {
-      width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center;
-      justify-content: center; font-size: 1.5rem; margin-bottom: 1.5rem;
+      width: 60px; height: 60px; border-radius: 16px; display: flex; align-items: center;
+      justify-content: center; font-size: 1.8rem; margin-bottom: 2rem;
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
     }
-    .card h3 { color: #fff; margin-bottom: 1rem; font-size: 1.3rem; }
-    .card p { color: var(--text-muted); font-size: 0.95rem; }
     
-    .bg-blue { background: rgba(88, 166, 255, 0.1); color: var(--primary); }
-    .bg-purple { background: rgba(188, 140, 255, 0.1); color: var(--accent); }
-    .bg-green { background: rgba(63, 185, 80, 0.1); color: var(--success); }
-    .bg-orange { background: rgba(210, 153, 34, 0.1); color: var(--warning); }
-
-    /* Sections */
-    section { padding: 6rem 0; }
-    .bg-alt { background: rgba(22, 27, 34, 0.3); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-
-    /* Profile / About Section */
-    .about-content { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start; }
-    .about-sidebar { position: sticky; top: 120px; }
-    .about-sidebar h2 { font-size: 2.5rem; color: #fff; margin-bottom: 0.5rem; }
-    .about-sidebar h4 { color: var(--primary); margin-bottom: 1.5rem; font-weight: 500; }
-    .contact-links { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem;}
-    .contact-links a { display: flex; align-items: center; gap: 0.8rem; color: var(--text-muted); text-decoration: none; transition: color 0.3s;}
-    .contact-links a:hover { color: #fff; }
+    .card h3 { font-size: 1.4rem; color: #fff; margin-bottom: 1rem; }
+    .card p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; }
     
-    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
-    .tag { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; color: var(--text); }
-    .tag.highlighted { background: rgba(188, 140, 255, 0.1); border-color: var(--accent); color: var(--accent); }
+    /* Tags */
+    .tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+    .tag { background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; color: #fff; backdrop-filter: blur(10px); }
 
-    /* Experience Timeline */
-    .timeline { border-left: 2px solid var(--border); padding-left: 2rem; margin-top: 2rem; margin-left: 1rem; }
-    .timeline-item { position: relative; margin-bottom: 3rem; }
-    .timeline-item::before {
-      content: ''; position: absolute; left: -2.4rem; top: 0; width: 16px; height: 16px;
-      border-radius: 50%; background: var(--primary); border: 4px solid var(--bg-color);
+    /* Visual Templates / Trending Ideas */
+    .trending-visual { width: 100%; height: 200px; background: rgba(0,0,0,0.4); border-radius: 12px; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;}
+    .workflow-line { position: absolute; width: 80%; height: 2px; background: rgba(255,255,255,0.1); }
+    .workflow-dots { display: flex; justify-content: space-between; width: 80%; position: relative; z-index: 2; }
+    .wf-dot { width: 40px; height: 40px; border-radius: 50%; background: #1f2937; border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+    
+    /* Profile Section styling */
+    .profile-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; }
+    .profile-image {
+      width: 100%; aspect-ratio: 1; border-radius: 30px; background: linear-gradient(45deg, var(--bg-color), rgba(88,166,255,0.2));
+      border: 1px solid var(--border); display: flex; justify-content: center; align-items: center;
+      font-size: 5rem; overflow: hidden; position: relative;
     }
-    .timeline-item h3 { color: #fff; font-size: 1.3rem; margin-bottom: 0.3rem; }
-    .timeline-item h4 { color: var(--text-muted); font-size: 1rem; font-weight: 400; margin-bottom: 1rem; display: flex; justify-content: space-between;}
-    .timeline-item ul { list-style: none; color: var(--text-muted); font-size: 0.95rem; }
-    .timeline-item ul li { margin-bottom: 0.5rem; position: relative; padding-left: 1.2rem; }
-    .timeline-item ul li::before { content: '▹'; position: absolute; left: 0; color: var(--accent); }
+    .profile-image::after { content: 'MS'; font-weight: 800; color: rgba(255,255,255,0.1); font-size: 8rem; position: absolute; }
 
-    /* Project Cards */
-    .project-card {
-      background: linear-gradient(to bottom right, rgba(22, 27, 34, 0.8), rgba(13, 17, 23, 0.9));
-      border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem; transition: transform 0.3s;
+    /* Contact Form (Igloo Style) */
+    .form-wrapper { background: transparent; }
+    .form-group { margin-bottom: 2rem; position: relative; }
+    .form-control {
+      width: 100%; padding: 1.2rem 0; background: transparent; border: none;
+      border-bottom: 1px solid var(--border); color: #fff; font-size: 1.2rem;
+      outline: none; transition: border-color 0.3s;
     }
-    .project-card:hover { transform: translateY(-5px); border-color: var(--accent); }
-    .project-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 1.5rem; }
-    .project-header h3 { font-size: 1.4rem; color: #fff; }
-    .project-link { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; border-bottom: 1px solid transparent; transition: all 0.2s;}
-    .project-link:hover { color: var(--primary); border-color: var(--primary); }
+    .form-control::placeholder { color: rgba(255,255,255,0.2); }
+    .form-control:focus { border-bottom-color: var(--primary); }
+    textarea.form-control { resize: none; min-height: 100px; }
+    
+    .pricing-tier {
+      border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem;
+      transition: all 0.3s; height: 100%; display: flex; flex-direction: column;
+    }
+    .pricing-tier:hover { border-color: var(--primary); background: rgba(88,166,255,0.02); }
+    .price-amount { font-size: 3.5rem; font-weight: 800; color: #fff; margin: 1rem 0; }
+    .price-amount span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+    .pricing-tier ul { list-style: none; margin: 2rem 0; flex-grow: 1; }
+    .pricing-tier ul li { margin-bottom: 1rem; color: #c9d1d9; font-size: 0.95rem; display: flex; gap: 0.8rem; }
+    .pricing-tier ul li::before { content: '→'; color: var(--accent); }
 
-    /* Certifications */
-    .cert-list { display: flex; flex-direction: column; gap: 1rem; }
-    .cert-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 1.5rem; border-radius: 12px; display: flex; align-items: center; gap: 1.5rem;}
-    .cert-icon { font-size: 2rem; opacity: 0.8; }
-    .cert-info h4 { color: #fff; font-size: 1.1rem; }
-    .cert-info p { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.3rem;}
-
-    /* Flowchart Demos */
-    .flowchart { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 3rem; margin-bottom: 3rem; }
-    .flow-label { display: inline-block; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 2rem; text-transform: uppercase;}
-    .label-easy { background: rgba(63, 185, 80, 0.1); color: var(--success); }
-    .label-medium { background: rgba(210, 153, 34, 0.1); color: var(--warning); }
-    .label-hard { background: rgba(188, 140, 255, 0.1); color: var(--accent); }
-    .node-container { display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
-    .node-container.complex { align-items: flex-start; flex-direction: column; }
-    .node { background: var(--bg-color); border: 1px solid var(--border); padding: 1.2rem; border-radius: 12px; display: flex; align-items: center; gap: 1rem; min-width: 200px; }
-    .node-icon { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-    .node-text h4 { font-size: 1rem; color: #fff; margin-bottom: 0.2rem; }
-    .node-text p { font-size: 0.8rem; color: var(--text-muted); }
-    .arrow { color: var(--text-muted); font-size: 1.5rem; }
-    .complex-row { display: flex; align-items: center; gap: 1.5rem; }
-    .split-path { display: flex; flex-direction: column; gap: 1rem; border-left: 2px solid var(--border); padding-left: 1.5rem; margin-left: -0.75rem; }
-
-    /* Pricing Section */
-    .price-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 3.5rem 2.5rem; text-align: center; position: relative; display: flex; flex-direction: column;}
-    .price { font-size: 3.5rem; font-weight: 800; color: #fff; margin: 1.5rem 0; line-height: 1; }
-    .price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
-    .popular { position: absolute; top: 25px; right: -40px; background: var(--accent); color: #fff; font-size: 0.8rem; font-weight: 700; padding: 0.5rem 4rem; transform: rotate(45deg); }
-    .price-card ul { list-style: none; text-align: left; margin: 2rem 0; flex-grow: 1; }
-    .price-card ul li { margin-bottom: 1.2rem; color: #c9d1d9; display: flex; align-items: flex-start; gap: 0.8rem; font-size: 0.95rem; }
-    .price-card ul li::before { content: '✓'; color: var(--primary); font-weight: bold; background: rgba(88, 166, 255, 0.1); width: 20px; height: 20px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.7rem; }
-
-    /* Form */
-    .form-wrapper { max-width: 600px; margin: 0 auto; background: var(--card-bg); backdrop-filter: blur(12px); border: 1px solid var(--border); border-radius: 20px; padding: 3rem; }
-    .form-header h3 { font-size: 1.8rem; color: #fff; margin-bottom: 0.5rem; text-align: center;}
-    .form-group { margin-bottom: 1.5rem; }
-    .form-label { display: block; margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
-    .form-control { width: 100%; padding: 1rem 1.2rem; background: rgba(13, 17, 23, 0.8); border: 1px solid var(--border); border-radius: 10px; color: #fff; font-size: 1rem; outline: none; transition: all 0.3s ease; }
-    .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.2); }
-    select.form-control { appearance: none; }
-    .btn-submit { width: 100%; padding: 1.2rem; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-top: 1.5rem;}
-    .btn-submit:hover { background: var(--primary-hover); transform: translateY(-2px); }
-    .loader { display: none; width: 22px; height: 22px; border: 3px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top-color: #fff; animation: spin 1s infinite linear; }
-    @keyframes spin { 100% { transform: rotate(360deg); } }
-    .success-msg { display: none; text-align: center; color: var(--success); background: rgba(63, 185, 80, 0.1); padding: 2rem; border-radius: 15px; border: 1px solid rgba(63, 185, 80, 0.2);}
-
-    footer { text-align: center; padding: 4rem 0 2rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 4rem;}
-    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-top: 1.5rem; }
+    footer { padding: 4rem 0; border-top: 1px solid var(--border); margin-top: 4rem; }
+    .footer-content { display: flex; justify-content: space-between; align-items: center; }
+    .footer-links { display: flex; gap: 2rem; }
     .footer-links a { color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
     .footer-links a:hover { color: #fff; }
 
+    /* Success Toast */
+    .toast {
+      position: fixed; bottom: -100px; right: 30px; background: rgba(30,36,44,0.9);
+      backdrop-filter: blur(10px); border: 1px solid var(--border); border-left: 4px solid var(--success);
+      padding: 1.5rem 2rem; border-radius: 12px; color: #fff; z-index: 9999;
+      transition: bottom 0.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    .toast.show { bottom: 30px; }
+
     @media (max-width: 900px) {
-      .about-content { grid-template-columns: 1fr; }
-      .about-sidebar { position: relative; top: 0; margin-bottom: 3rem; }
+      .hero h1 { font-size: 3.5rem; }
+      .profile-grid { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
       nav { display: none; }
     }
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 2.5rem; }
-      .profile-stats { gap: 1.5rem; flex-direction: column;}
-      .complex-row { flex-direction: column; align-items: stretch; }
-      .arrow { transform: rotate(90deg); margin: 0 auto; }
-      .split-path { border-left: none; border-top: 2px solid var(--border); padding-top: 1.5rem; padding-left: 0; margin-top: 1rem; margin-left: 0; }
-    }
   </style>
+  
+  <!-- SEO Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Mustakim Shaikh",
+    "jobTitle": "Generative AI Engineer",
+    "url": "https://yourdomain.com",
+    "sameAs": [
+      "https://github.com/MustakimShaikh01",
+      "https://linkedin.com/in/mustakim-sh"
+    ]
+  }
+  </script>
 </head>
 
 <body>
 
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
-  <div class="blob blob-4"></div>
+  <!-- Interactive Three.js / Vanta.js Background -->
+  <div id="vanta-canvas"></div>
+  <div class="bg-overlay"></div>
 
-  <header>
-    <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-      <a href="#" class="logo">⚡ Autoify<span>AI</span></a>
+  <header id="navbar">
+    <div class="container header-content">
+      <a href="#" class="logo">⚡ MS<span>.</span>AI</a>
       <nav>
-        <a href="#services">Services</a>
-        <a href="#portfolio">About Me</a>
-        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#services">Architecture</a>
+        <a href="#trending">Trending AI</a>
         <a href="#pricing">Pricing</a>
       </nav>
-      <a href="#contact" class="cta-btn" style="padding: 0.6rem 1.5rem; font-size: 0.95rem;">Hire Me</a>
+      <a href="#contact" class="cta-btn primary" style="padding: 0.6rem 1.5rem;">Hire Me</a>
     </div>
   </header>
 
   <div class="container">
     <section class="hero">
-      <h1>Production-Grade <span class="highlight">AI & Automation</span></h1>
-      <p>I build autonomous AI systems, private LLM integrations, and scalable automation workflows that actually ship and generate ROI.</p>
-      
-      <div style="margin-top: 2rem;">
-        <a href="#contact" class="cta-btn">Book a Consultation</a>
-        <a href="#portfolio" class="cta-btn secondary">View My Portfolio</a>
-      </div>
-
-      <div class="profile-stats">
-        <div class="stat">
-          <h4>3+</h4>
-          <p>Yrs Experience</p>
+      <div class="hero-content reveal">
+        <div class="hero-badge">
+          <div class="status-dot"></div> Available for new opportunities
         </div>
-        <div class="stat">
-          <h4>5K+</h4>
-          <p>Docs Processed/mo</p>
-        </div>
-        <div class="stat">
-          <h4>300+</h4>
-          <p>AI Queries/day</p>
-        </div>
-        <div class="stat">
-          <h4>9+</h4>
-          <p>Agent Ecosystems</p>
+        <h1>Architecting<br><span style="color: var(--primary);">Autonomous</span> Futures.</h1>
+        <p>I am Mustakim Shaikh. A Generative AI Engineer building secure, local LLMs, intelligent RAG pipelines, and enterprise automation that actually scales.</p>
+        
+        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+          <a href="#contact" class="cta-btn primary">Let's Build It</a>
+          <a href="#trending" class="cta-btn outline">View Automations</a>
         </div>
       </div>
     </section>
   </div>
 
-  <section id="services" class="bg-alt">
-    <div class="container">
-      <h2 class="section-title">What I Can Build For You</h2>
-      <p class="section-subtitle">From simple Zapier workflows to fully private, self-hosted LLM clusters orchestrating autonomous agents.</p>
-      
-      <div class="grid-3">
-        <div class="card">
-          <div class="icon-box bg-purple">🧠</div>
-          <h3>Private & Secure LLMs</h3>
-          <p>Deploy enterprise-grade local LLMs (Ollama, llama.cpp, vLLM) so your sensitive data never leaves your servers. Zero OpenAI API costs.</p>
-        </div>
-        <div class="card">
-          <div class="icon-box bg-blue">🤖</div>
-          <h3>Autonomous AI Agents</h3>
-          <p>Multi-agent orchestration mimicking human teams. Strategists, researchers, and approvers executing complex tasks automatically.</p>
-        </div>
-        <div class="card">
-          <div class="icon-box bg-green">📚</div>
-          <h3>Custom RAG Pipelines</h3>
-          <p>Chat securely with your enterprise knowledge base (PDFs, Docs). Built with Qdrant, LangChain, and advanced semantic search capabilities.</p>
-        </div>
-        <div class="card">
-          <div class="icon-box bg-orange">⚡</div>
-          <h3>Workflow Automation</h3>
-          <p>Connect your CRM, Lead Forms, and internal tools seamlessly. If it happens twice, I will automate it so it runs effortlessly 24/7.</p>
-        </div>
-        <div class="card">
-          <div class="icon-box bg-purple">⚙️</div>
-          <h3>Scalable AI Backends</h3>
-          <p>FastAPI microservices built to handle thousands of requests seamlessly. Featuring Docker containerization and Celery background tasks.</p>
-        </div>
-        <div class="card">
-          <div class="icon-box bg-blue">📧</div>
-          <h3>Email Journey Systems</h3>
-          <p>Automated hyper-personalized cold outreach and customer onboarding generated dynamically by AI and delivered reliably.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Portfolio Section -->
-  <div class="container">
-    <section id="portfolio">
-      <div class="about-content">
-        <div class="about-sidebar">
-          <h2>Mustakim Shaikh</h2>
-          <h4>Generative AI Engineer</h4>
-          <p style="color: var(--text-muted); line-height: 1.7;">
-            Based in Chandigarh, India. I specialize in taking bleeding-edge AI research and turning it into scalable, production-ready systems.
-            Under deadlines and production pressure, I stay calm, iterate fast, and ship quality engineering.
-          </p>
-          
-          <div class="tags" style="margin-top: 1.5rem;">
-            <span class="tag highlighted">Handles Pressure ✓</span>
-            <span class="tag highlighted">Fast Learner ✓</span>
+  <section id="about" class="container">
+    <div class="profile-grid">
+      <div class="reveal">
+        <div class="profile-image"></div>
+        <div style="margin-top: 2rem;">
+          <h3 style="color:#fff; font-size: 1.5rem; margin-bottom: 0.5rem;">Mustakim Shaikh</h3>
+          <p style="color:var(--text-muted); margin-bottom: 1.5rem;">Generative AI Engineer based in Chandigarh. MCA (8.02 CGPA). Specializing in taking bleeding-edge AI models to production.</p>
+          <div class="tags">
             <span class="tag">LLM Engineer</span>
             <span class="tag">RAG Architect</span>
-            <span class="tag">MCA (8.02 CGPA)</span>
-          </div>
-
-          <div class="contact-links">
-            <a href="mailto:mustakim.shaikh.prof@gmail.com">📧 mustakim.shaikh.prof@gmail.com</a>
-            <a href="tel:+919359768168">📱 +91 9359768168</a>
-            <a href="#">💼 LinkedIn Profile</a>
-            <a href="#">🐙 GitHub Repository</a>
-            <a href="#">🤗 HuggingFace Hub</a>
-          </div>
-        </div>
-
-        <div class="about-main">
-          
-          <h3 style="font-size: 1.6rem; color: #fff; margin-bottom: 1.5rem;">Technical Arsenal</h3>
-          <div class="grid-2">
-            <div>
-              <h4 style="color: var(--primary); margin-bottom: 0.8rem; display:flex; align-items:center; gap:0.5rem;">🤖 GenAI & LLMs</h4>
-              <div class="tags">
-                <span class="tag">RAG Pipelines</span>
-                <span class="tag">Multi-Agent Systems</span>
-                <span class="tag">Ollama / llama.cpp</span>
-                <span class="tag">vLLM</span>
-                <span class="tag">Fine-Tuning (LoRA)</span>
-              </div>
-            </div>
-            <div>
-              <h4 style="color: var(--accent); margin-bottom: 0.8rem; display:flex; align-items:center; gap:0.5rem;">⚙️ Frameworks & Cloud</h4>
-              <div class="tags">
-                <span class="tag">LangChain</span>
-                <span class="tag">FastAPI</span>
-                <span class="tag">React / Next.js</span>
-                <span class="tag">Docker</span>
-                <span class="tag">AWS (EC2, S3)</span>
-              </div>
-            </div>
-            <div>
-              <h4 style="color: var(--success); margin-bottom: 0.8rem; display:flex; align-items:center; gap:0.5rem;">🗄️ Databases & Vector</h4>
-              <div class="tags">
-                <span class="tag">PostgreSQL</span>
-                <span class="tag">Qdrant (Vector DB)</span>
-                <span class="tag">ChromaDB</span>
-                <span class="tag">Redis</span>
-                <span class="tag">MongoDB</span>
-              </div>
-            </div>
-          </div>
-
-          <h3 style="font-size: 1.6rem; color: #fff; margin: 4rem 0 1.5rem;">Professional Experience</h3>
-          <div class="timeline">
-            
-            <div class="timeline-item">
-              <h3>AI & Machine Learning Engineer</h3>
-              <h4>Vikash Tech Solution <span>Jun 2025 – Present</span></h4>
-              <ul>
-                <li>Built LLM-powered document processing handling <strong>5K+ docs/month</strong>, reducing manual analysis by ~50%.</li>
-                <li>Developed RAG pipelines improving retrieval accuracy by ~25% across internal knowledge bases.</li>
-                <li>Designed FastAPI services serving <strong>300+ daily AI queries</strong> with avg latency <400ms.</li>
-                <li>Implemented local LLM inference with Ollama & llama.cpp, <strong>cutting external API costs by ~30%</strong>.</li>
-              </ul>
-            </div>
-
-            <div class="timeline-item">
-              <h3>Software & Data Engineer</h3>
-              <h4>Siddharth Carbon Chemicals Ltd <span>Apr 2024 – Jun 2025</span></h4>
-              <ul>
-                <li>Built analytics processing 30K+ production records/day to monitor manufacturing performance.</li>
-                <li>Automated data pipelines reducing manual reporting by ~40%.</li>
-                <li>Automated ERP workflows including inventory tracking and cross-team modules.</li>
-              </ul>
-            </div>
-
-            <div class="timeline-item">
-              <h3>Associate Software Engineer</h3>
-              <h4>RhythmFlows Solutions Pvt. Ltd <span>Aug 2022 – Mar 2024</span></h4>
-              <ul>
-                <li>Developed backend APIs and automation modules for ERP financial systems.</li>
-                <li>Improved database query performance through optimized SQL logic and indexing.</li>
-              </ul>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-      <h2 class="section-title">Featured Engineering Work</h2>
-      <p class="section-subtitle">Real systems built to solve complex enterprise problems.</p>
-      
-      <div class="grid-2">
-        <div class="project-card">
-          <div class="project-header">
-            <h3>🏢 AgencyOS</h3>
-            <a href="#" class="project-link">View Demo ↗</a>
-          </div>
-          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-            Fully autonomous AI marketing agency. Orchestrates 9 specialized LLM agents (Strategist, Writer, Risk Officer) via a 5-level governance engine. Features a 3D Metaverse office UI powered by Three.js and WebSockets. Local-only LLMs ensure zero OpenAI API costs.
-          </p>
-          <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">LangChain</span>
             <span class="tag">FastAPI</span>
-            <span class="tag">Three.js</span>
-            <span class="tag">WebSockets</span>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <h3>📄 PageTutor AI</h3>
-            <a href="#" class="project-link">View Repo ↗</a>
-          </div>
-          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-            Enterprise PDF-to-Learning suite. Extracts unstructured data to generate AI summaries, flashcards, auto-PowerPoints, 10+ language TTS, and Chat-with-PDF RAG Q&A. Built on an enterprise architecture spanning vLLM, Celery, Qdrant, and Next.js SSR.
-          </p>
-          <div class="tags">
-            <span class="tag">vLLM</span>
-            <span class="tag">Celery</span>
-            <span class="tag">Qdrant</span>
-            <span class="tag">RAG</span>
-            <span class="tag">Next.js</span>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <h3>🛡️ Incident Platform</h3>
-            <a href="#" class="project-link">View System ↗</a>
-          </div>
-          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-            Senior-level end-to-end incident management system. Incorporates a Python AI analysis engine connected to a Java Spring Boot REST API. Focuses on human-in-the-loop approvals, microservice boundaries, and defensive automation.
-          </p>
-          <div class="tags">
             <span class="tag">Docker</span>
-            <span class="tag">Microservices</span>
-            <span class="tag">Spring Boot</span>
-            <span class="tag">React</span>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <h3>🎯 SkillMatch AI</h3>
-            <a href="#" class="project-link">Try Now ↗</a>
-          </div>
-          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-            AI resume-to-job matcher combining NLP (spaCy, TF-IDF) with advanced DSA (Skill Trie, Graph DAG topological sort). Dynamically generates dependency-ordered learning roadmaps to cover candidates' skill gaps.
-          </p>
-          <div class="tags">
-            <span class="tag">NLP</span>
-            <span class="tag">spaCy</span>
-            <span class="tag">Graph DAG</span>
-            <span class="tag">MongoDB</span>
           </div>
         </div>
       </div>
-    </section>
-  </div>
-
-  <section class="bg-alt">
-    <div class="container">
-      <h2 class="section-title">Architecture Templates & Tools</h2>
-      <p class="section-subtitle">A glimpse into what we configure for you immediately. Buy access to implement these instantly.</p>
-
-      <!-- Easy Automation -->
-      <div class="flowchart">
-        <span class="flow-label label-easy">Basic Workflow — Lead Capture</span>
-        <div class="node-container">
-          <div class="node"><div class="node-icon bg-blue">📝</div><div class="node-text"><h4>Web Form</h4><p>Trigger: New Entry</p></div></div>
-          <div class="arrow">➔</div>
-          <div class="node"><div class="node-icon bg-green">📧</div><div class="node-text"><h4>Send Email</h4><p>Action: Auto-reply</p></div></div>
+      
+      <div class="reveal">
+        <div class="section-header" style="margin-bottom: 2rem;">
+          <h2 class="section-title">The Engineering Edge</h2>
         </div>
-      </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 2rem;">
+          <div class="card" style="padding: 2rem;">
+            <h3 style="display:flex; align-items:center; gap:0.5rem; color:var(--primary);">🏢 AgencyOS</h3>
+            <p>Fully autonomous AI marketing agency. Orchestrates 9 specialized LLM agents via a 5-level governance engine. Features a 3D Metaverse office UI powered by Three.js and WebSockets. Local-only LLMs ensure zero API costs.</p>
+            <div class="tags">
+              <span class="tag">LangChain</span><span class="tag">Three.js</span><span class="tag">GSAP</span>
+            </div>
+          </div>
 
-      <!-- Hard Automation -->
-      <div class="flowchart" style="border-color: rgba(188, 140, 255, 0.3);">
-        <span class="flow-label label-hard">Enterprise Architecture — Secure LLM Orchestration</span>
-        <div class="node-container complex">
-          <div class="complex-row">
-            <div class="node"><div class="node-icon bg-blue">📩</div><div class="node-text"><h4>Inbound Query</h4><p>Internal Server</p></div></div>
-            <div class="arrow">➔</div>
-            <div class="node" style="border-color: var(--accent);"><div class="node-icon bg-purple">🧠</div><div class="node-text"><h4>llama.cpp / vLLM</h4><p>Local Private Server</p></div></div>
-            <div class="arrow">➔</div>
-            <div class="split-path">
-              <div class="node"><div class="node-icon bg-green">📚</div><div class="node-text"><h4>Qdrant Vector DB</h4><p>Fetch Corporate Data</p></div></div>
-              <div class="node"><div class="node-icon bg-orange">🛡️</div><div class="node-text"><h4>Security Layer</h4><p>PII Redaction</p></div></div>
+          <div class="card" style="padding: 2rem;">
+            <h3 style="display:flex; align-items:center; gap:0.5rem; color:var(--accent);">📄 PageTutor AI</h3>
+            <p>Enterprise PDF-to-Learning suite. Extracts unstructured data to generate AI summaries, flashcards, auto-PowerPoints, 10+ language TTS. Built on an enterprise architecture spanning vLLM, Celery, Qdrant, and Next.js SSR.</p>
+            <div class="tags">
+              <span class="tag">vLLM</span><span class="tag">Celery</span><span class="tag">Qdrant</span>
             </div>
           </div>
         </div>
@@ -601,127 +336,242 @@
     </div>
   </section>
 
-  <!-- Pricing Section -->
-  <div class="container">
-    <section id="pricing">
-      <h2 class="section-title">Hire Me / License Packages</h2>
-      <p class="section-subtitle">Get private access to templates or hire me directly to build your custom autonomous infrastructure.</p>
-      
+  <section id="services">
+    <div class="container relative">
+      <div class="section-header reveal">
+        <h2 class="section-title">Systems & Services</h2>
+        <p class="section-subtitle">Premium solutions tailored for scale, security, and pure operational leverage.</p>
+      </div>
+
       <div class="grid-3">
-        <div class="price-card">
-          <h3>Basic Template Access</h3>
-          <div class="price">₹99 <span>/ one-time</span></div>
-          <p style="color:var(--text-muted); margin-bottom: 1rem;">DIY access to simple scripts.</p>
-          <ul>
-            <li>Access to 1 Premium Workflow</li>
-            <li>Basic Webhook Documentation</li>
-            <li>Email Support</li>
-          </ul>
-          <a href="#contact" class="cta-btn" style="width:100%;" onclick="document.getElementById('plan').value='Basic Plan'">Get Templates</a>
+        <div class="card reveal">
+          <div class="icon-box" style="color: var(--primary);">🧠</div>
+          <h3>Private Enterprise LLMs</h3>
+          <p>Local inference setups using Ollama & llama.cpp. Keep sensitive data completely offline while achieving GPT-4 level intelligence. Zero token fees.</p>
         </div>
-        
-        <div class="price-card" style="border-color: var(--accent);">
-          <div class="popular">Recommended</div>
-          <h3>AI Automation Setup</h3>
-          <div class="price">₹29,999 <span>/ build</span></div>
-          <p style="color:var(--text-muted); margin-bottom: 1rem;">Done-for-you integration.</p>
-          <ul>
-            <li>Full CRM & Email Automation</li>
-            <li>Custom Data Pipelines</li>
-            <li>Zapier/Make Setup</li>
-            <li>1 Month Bug Support</li>
-          </ul>
-          <a href="#contact" class="cta-btn" style="width:100%; background:var(--accent);" onclick="document.getElementById('plan').value='AI Automation Setup'">Hire For Build</a>
+        <div class="card reveal" style="background: rgba(188, 140, 255, 0.05); border-color: rgba(188, 140, 255, 0.2);">
+          <div class="icon-box" style="color: var(--accent);">🤖</div>
+          <h3>Multi-Agent Workflows</h3>
+          <p>Replacing standard automations with thinking agents. Built with LangChain and MCP protocols to autonomously resolve complex workflows.</p>
         </div>
-        
-        <div class="price-card">
-          <h3>Enterprise / Private LLM</h3>
-          <div class="price">Custom <span>/ retainer</span></div>
-          <p style="color:var(--text-muted); margin-bottom: 1rem;">Secure, complex AI systems.</p>
-          <ul>
-            <li>Local LLM Hosting Architecture</li>
-            <li>Multi-Agent Orchestration</li>
-            <li>Scalable FastAPI Backends</li>
-            <li>Priority SLA Call Access</li>
-          </ul>
-          <a href="#contact" class="cta-btn" style="width:100%;" onclick="document.getElementById('plan').value='Enterprise LLM Build'">Request Proposal</a>
+        <div class="card reveal">
+          <div class="icon-box" style="color: var(--success);">⚡</div>
+          <h3>Backend & Integration</h3>
+          <p>Replacing Zapier with custom, high-speed FastAPI microservices. Connect Stripe, CRMs, and APIs natively with Celery background processing.</p>
         </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="bg-alt">
-    <div class="container">
-      <div class="form-wrapper">
-        <div class="form-header">
-          <h3>Let's Build Something Great</h3>
-          <p>I am actively exploring AI / ML roles or taking on ambitious freelance builds. Tell me what you're trying to achieve.</p>
+  <section id="trending" style="background: rgba(0,0,0,0.2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container test">
+      <div class="section-header reveal">
+        <h2 class="section-title">Trending Automations</h2>
+        <p class="section-subtitle">What top companies are buying right now to scale without headcounts.</p>
+      </div>
+
+      <div class="grid-2">
+        <!-- Trend 1 -->
+        <div class="card reveal">
+          <div class="trending-visual">
+            <div class="workflow-line"></div>
+            <div class="workflow-dots">
+              <div class="wf-dot" style="color:var(--primary);">🎙️</div>
+              <div class="wf-dot" style="color:var(--accent);">🤖</div>
+              <div class="wf-dot" style="color:var(--success);">📅</div>
+            </div>
+          </div>
+          <h3>AI Voice Outbound Agents</h3>
+          <p>Connect Vapi/Retell AI to your prospect list. An autonomous voice agent cold-calls leads, handles objections, and automatically inserts booked meetings into your Calendar & CRM.</p>
         </div>
 
+        <!-- Trend 2 -->
+        <div class="card reveal">
+          <div class="trending-visual">
+            <div class="workflow-line"></div>
+            <div class="workflow-dots">
+              <div class="wf-dot" style="color:var(--primary);">🎫</div>
+              <div class="wf-dot" style="color:var(--accent);">🧠</div>
+              <div class="wf-dot" style="color:var(--success);">✅</div>
+            </div>
+          </div>
+          <h3>Autonomous Tier-1 Support</h3>
+          <p>Intercepts incoming Zendesk/Intercom tickets. RAG queries your documentation, takes actions via API (refunds/updates), and closes tickets without human intervention.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="container">
+    <div class="section-header reveal" style="text-align: center; margin: 0 auto 4rem auto;">
+      <h2 class="section-title">Scale With AI</h2>
+      <p class="section-subtitle">Select how you want to deploy engineering leverage in your business.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="pricing-tier reveal">
+        <h3 style="color:#fff;">Template Library</h3>
+        <div class="price-amount">₹4,999<span>/lifetime</span></div>
+        <p style="color:var(--text-muted)">Self-serve robust workflows.</p>
+        <ul>
+          <li>Access to 5 Premium Make/Zapier Scripts</li>
+          <li>Lead Capture & CRM Sync</li>
+          <li>Email Architecture Docs</li>
+        </ul>
+        <a href="#contact" class="cta-btn outline" style="text-align:center; margin-top:1rem;" onclick="document.getElementById('plan').value='Template Library'">Buy Access</a>
+      </div>
+
+      <div class="pricing-tier reveal" style="border-color: var(--accent); background: rgba(188,140,255,0.03);">
+        <h3 style="color:var(--accent);">Workflow Setup</h3>
+        <div class="price-amount">₹34,999<span>/build</span></div>
+        <p style="color:var(--text-muted)">Done-for-you integrations.</p>
+        <ul>
+          <li>Full Pipeline Automation</li>
+          <li>Custom Backend Hooks</li>
+          <li>Voice AI Integrations</li>
+          <li>30 Days Bug Support</li>
+        </ul>
+        <a href="#contact" class="cta-btn primary" style="background:var(--accent); text-align:center; margin-top:1rem;" onclick="document.getElementById('plan').value='Workflow Setup'">Hire For Build</a>
+      </div>
+
+      <div class="pricing-tier reveal">
+        <h3 style="color:#fff;">Enterprise LLM</h3>
+        <div class="price-amount">Custom<span>/mo</span></div>
+        <p style="color:var(--text-muted)">Private models & architecture.</p>
+        <ul>
+          <li>Containerized Local LLMs</li>
+          <li>Multi-Agent Orchestration</li>
+          <li>Hardware Cost Optimization</li>
+          <li>SLA-backed Support</li>
+        </ul>
+        <a href="#contact" class="cta-btn outline" style="text-align:center; margin-top:1rem;" onclick="document.getElementById('plan').value='Enterprise LLM'">Contact Me</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="container">
+    <div class="grid-2 reveal">
+      <div>
+        <h2 class="section-title" style="font-size: 4rem;">Let's Talk.</h2>
+        <p class="section-subtitle" style="max-width: 400px; margin-left: 0;">Actively open to ambitious freelance builds or full-time AI/ML roles. Reach out directly.</p>
+        <div style="margin-top: 3rem;">
+          <p style="color:#fff; font-size:1.2rem; margin-bottom: 0.5rem;">📧 mustakim.shaikh.prof@gmail.com</p>
+          <p style="color:#fff; font-size:1.2rem;">📱 +91 9359768168</p>
+        </div>
+      </div>
+
+      <div class="form-wrapper">
         <form id="leadForm">
           <div class="form-group">
-            <label class="form-label" for="name">Your Name</label>
-            <input type="text" class="form-control" id="name" placeholder="John Doe" required>
+            <input type="text" class="form-control" id="name" placeholder="What's your name?" required>
           </div>
           <div class="form-group">
-            <label class="form-label" for="email">Your Email</label>
-            <input type="email" class="form-control" id="email" placeholder="john@company.com" required>
+            <input type="email" class="form-control" id="email" placeholder="Your email address?" required>
+          </div>
+          <div class="form-group" style="display:none;">
+             <input type="hidden" id="phone" value="Web Inquiry">
           </div>
           <div class="form-group">
-            <label class="form-label" for="plan">Subject / Engagement Type</label>
-            <select class="form-control" id="plan" required>
-              <option value="" disabled selected>Select an option...</option>
-              <option value="Hiring / AI Role Opportunity">Hiring / AI Role Opportunity</option>
-              <option value="Enterprise LLM Build">Enterprise Private LLM Build</option>
-              <option value="AI Automation Setup">Done-For-You Automation</option>
-              <option value="Basic Plan">Basic Template Access</option>
+            <select class="form-control" id="plan" required style="appearance: none; color: #fff;">
+              <option value="" disabled selected>What do you need?</option>
+              <option value="Hiring / AI Role">Hiring (AI Role)</option>
+              <option value="Enterprise LLM">Enterprise Private LLM</option>
+              <option value="Workflow Setup">Done-For-You Workflow</option>
+              <option value="Template Library">Template Access</option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label" for="message">Project Details</label>
-            <textarea class="form-control" id="message" placeholder="Tell me what you're building..." required></textarea>
+            <textarea class="form-control" id="message" placeholder="Tell me about your project..." required></textarea>
           </div>
-          
-          <button type="submit" class="btn-submit" id="submitBtn">
-            <span>Send Message 🚀</span>
-            <div class="loader" id="loader"></div>
-          </button>
+          <button type="submit" class="cta-btn primary" id="submitBtn" style="border-radius: 8px; width: 100%; font-size: 1.1rem; padding: 1.2rem;">Send Message</button>
         </form>
-
-        <div class="success-msg" id="successCard">
-          <h4>🎉 Message Received!</h4>
-          <p>I have received your request and the automated system has already dispatched an intro email to your inbox.</p>
-        </div>
       </div>
     </div>
   </section>
 
-  <footer>
-    <div class="container">
-      <div class="logo" style="justify-content: center; font-size: 1.2rem;">Mustakim<span>Shaikh</span></div>
+  <footer class="container">
+    <div class="footer-content reveal">
+      <div class="logo">⚡ MS<span>.</span>AI</div>
       <div class="footer-links">
-        <a href="#">GitHub</a>
-        <a href="#">LinkedIn</a>
-        <a href="#">HuggingFace</a>
-        <a href="#">Kaggle</a>
+        <a href="https://github.com/MustakimShaikh01" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/mustakim-sh" target="_blank">LinkedIn</a>
+        <a href="#" target="_blank">HuggingFace</a>
+        <a href="#" target="_blank">Kaggle</a>
       </div>
-      <p style="margin-top: 1.5rem; font-size: 0.85rem;">© 2026 Mustakim Shaikh · Built with Three.js + GSAP Inspiration</p>
+    </div>
+    <div style="text-align: center; margin-top: 3rem; color: var(--border); font-size: 0.8rem;">
+      © 2026 Mustakim Shaikh. Engineered with Three.js & GSAP.
     </div>
   </footer>
 
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">Message received successfully! Check your inbox.</div>
+
+  <!-- External Scripts for Premium Interactivity -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.waves.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
   <script>
+    // 1. Initialize Vanta Waves Background (igloo.inc style)
+    VANTA.WAVES({
+      el: "#vanta-canvas",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      color: 0x05080e, // Very dark blue/black
+      shininess: 30.00,
+      waveHeight: 15.00,
+      waveSpeed: 0.50,
+      zoom: 0.8
+    });
+
+    // 2. GSAP Scroll Animations
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Animate Header on Scroll
+    const header = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 50) {
+        header.style.background = 'rgba(13, 17, 23, 0.85)';
+        header.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
+      } else {
+        header.style.background = 'rgba(13, 17, 23, 0.5)';
+        header.style.boxShadow = 'none';
+      }
+    });
+
+    // Reveal Elements
+    const revealElements = document.querySelectorAll('.reveal');
+    revealElements.forEach((el) => {
+      gsap.to(el, {
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%", // Trigger when top of element hits 85% of viewport
+          toggleActions: "play none none none"
+        },
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out"
+      });
+    });
+
+    // 3. Form Submission Logic
     const leadForm = document.getElementById('leadForm');
     const submitBtn = document.getElementById('submitBtn');
-    const loader = document.getElementById('loader');
-    const btnText = submitBtn.querySelector('span');
-    const successCard = document.getElementById('successCard');
+    const toast = document.getElementById('toast');
 
     leadForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
-      btnText.style.display = 'none';
-      loader.style.display = 'block';
+      const originalText = submitBtn.innerText;
+      submitBtn.innerText = 'Sending...';
       submitBtn.disabled = true;
 
       const selectedPlan = document.getElementById('plan').value;
@@ -743,9 +593,10 @@
         const data = await response.json();
 
         if (data.success) {
-          leadForm.style.display = 'none';
-          document.querySelector('.form-header').style.display = 'none';
-          successCard.style.display = 'block';
+          // Show Toast, Reset Form
+          toast.classList.add('show');
+          leadForm.reset();
+          setTimeout(() => { toast.classList.remove('show'); }, 5000);
         } else {
           alert('Failed to submit form. ' + data.error);
         }
@@ -753,11 +604,8 @@
         console.error('Error:', error);
         alert('A network error occurred.');
       } finally {
-        if(leadForm.style.display !== 'none') {
-          btnText.style.display = 'block';
-          loader.style.display = 'none';
-          submitBtn.disabled = false;
-        }
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
       }
     });
   </script>
