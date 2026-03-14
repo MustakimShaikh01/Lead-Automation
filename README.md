@@ -63,35 +63,4 @@ cd Lead-Automation
 npm install
 ```
 
-### 3. Initialize `.env` Keys (For Production)
-The app runs safely testing logic locally out-of-the-box. To actually connect out integrations securely, map a `.env`:
 
-```env
-NODE_ENV=development
-EMAIL_USER=your_business_address@gmail.com
-EMAIL_PASS=your_16_digit_app_password
-ADMIN_EMAIL=your_admin_dashboard@example.com
-```
-
-### 4. Ignite the Playground
-```bash
-npm start
-```
-*The Autoify server logic is now actively listening on `http://localhost:3000`.* 
-
----
-
-## ☁️ Deploying to Render (For Free Demos & Business Setup)
-
-This marketplace is explicitly structured to act as your core Business Engine hosted on Render.com:
-
-1. Push this repository to your GitHub account (this codebase comes pre-configured with a `.gitignore`).
-2. Navigate to **Render.com** > Connect GitHub > Select **New Web Service**.
-3. Set Build Command: `npm install` | Start Command: `npm start`.
-4. Inject the `.env` Variables under "Environment":
-   *   `NODE_ENV` = `production`
-   *   `EMAIL_USER` 
-   *   `EMAIL_PASS`
-   *   `ADMIN_EMAIL`
-
-Once Render completes the build, the engine recognizes the `production` state and transitions from sandbox email routing to pure SMTP execution. Your Autoify Marketplace is officially live.
