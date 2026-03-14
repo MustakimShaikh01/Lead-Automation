@@ -29,9 +29,9 @@ The platform is engineered to be **instantly deployed on Render.com** so you can
 *   **🛒 Trending AI Templates:** Pre-configured architecture for Lead Capture pipelines, Autonomous AI Voice Agents, and Zendesk/Support RAG integrations. Built directly into the platform logic.
 *   **⚙️ "Make/Zapier" Open Source Alternative:** An API playground built on Node.js + Express. Accepts payloads, mutates data, and connects systems securely without volume limits.
 *   **📈 Built-In Subscription Scalability:**
-    *   *Starter:* Get 1 Template / Create 1 custom flow. 
-    *   *Pro:* Get 2 Templates / Create 3 custom flows.
-    *   *Enterprise:* Get 5 Templates / Create 5 custom flows + access fully Private LLMs.
+    *   *Starter Playground:* Get 1 Template / Create 1 custom flow. 
+    *   *Pro Creator:* Get 2 Templates / Create 3 custom flows.
+    *   *Enterprise Hub:* Get 5 Templates / Create 5 custom flows + access fully Private LLMs.
 *   **📧 Universal Email Engine:** Dynamically switches between an `Ethereal.email` local testing sandbox and robust `Google SMTP` in production. 
 
 ---
@@ -63,4 +63,56 @@ cd Lead-Automation
 npm install
 ```
 
+### 3. Initialize `.env` Keys (For Production)
+The app runs safely testing logic locally out-of-the-box. To actually connect out integrations securely, map a `.env`:
 
+```env
+NODE_ENV=development
+EMAIL_USER=your_business_address@gmail.com
+EMAIL_PASS=your_16_digit_app_password
+ADMIN_EMAIL=your_admin_dashboard@example.com
+```
+
+### 4. Ignite the Playground
+```bash
+npm start
+```
+*The Autoify server logic is now actively listening on `http://localhost:3000`.* 
+
+---
+
+## ☁️ Deploying to Render (For Free Demos & Business Setup)
+
+This marketplace is explicitly structured to act as your core Business Engine hosted on Render.com:
+
+1. Push this repository to your GitHub account (this codebase comes pre-configured with a `.gitignore`).
+2. Navigate to **Render.com** > Connect GitHub > Select **New Web Service**.
+3. Set Build Command: `npm install` | Start Command: `npm start`.
+4. Inject the `.env` Variables under "Environment":
+   *   `NODE_ENV` = `production`
+   *   `EMAIL_USER` 
+   *   `EMAIL_PASS`
+   *   `ADMIN_EMAIL`
+
+Once Render completes the build, the engine recognizes the `production` state and transitions from sandbox email routing to pure SMTP execution. Your Autoify Marketplace is officially live.
+
+---
+
+## 🤝 Community & Support
+
+> **Founder & Architectural Lead: Mustakim Shaikh**
+> 
+> "I built Autoify to bridge the gap between expensive enterprise automation tools and the developer's need for control. This is the playground where AI meets pure efficiency."
+
+<div align="center">
+  <a href="https://github.com/MustakimShaikh01">
+    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+  </a>
+  <a href="https://linkedin.com/in/mustakim-sh">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+  </a>
+</div>
+
+---
+
+<p align="center"><i>If this marketplace helped you scale your agency, please leave a ⭐️ on the repository!</i></p>
