@@ -90,4 +90,6 @@ app.listen(PORT, () => {
   console.log(`🎯 Server actively listening!`);
   console.log(`🌍 http://localhost:${PORT}`);
   console.log(`================================`);
+}).on('error', (err) => {
+  console.error('SERVER ERROR:', err.message);
 });
