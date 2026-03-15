@@ -4,47 +4,144 @@ const path = require('path');
 const db = require('./db');
 require('dotenv').config();
 
-// Now using our universal sender that switches between test/prod automatically
 const { sendEmail } = require('./emailService');
 
 const compression = require('compression');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const xss = require('xss-clean');
 const hpp = require('hpp');
+const xss = require('xss');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// === SECURITY STACK (Enterprise Grade) ===
-app.use(helmet({
-  contentSecurityPolicy: false, // Set to false to allow CDN scripts like Vanta/Three.js
-}));
-app.use(xss()); // Sanitize Data
-app.use(hpp()); // Prevent Parameter Pollution
-app.disable('x-powered-by'); // Hide server info
+// === SECURITY STACK ===
+app.use(
+  helmet({
+    contentSecurityPolicy: false
+  })
+);
 
-// Rate Limiting: Prevent DDoS/Bot Spam (Max 10 leads per 15 mins per IP)
+app.use(hpp());
+app.disable('x-powered-by');
+
+// === RATE LIMIT ===
 const leadLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 10,
   message: { error: 'Too many requests. Please try again later.' }
 });
+
 app.use('/api/lead', leadLimiter);
 
-// Performance Middleware
+// === PERFORMANCE ===
 app.use(compression());
 app.use(cors());
 app.use(express.json());
 
-// Optimized Static Serving with Caching
-const cacheTime = 31536000000; // 1 year for assets
-app.use('/assets', express.static(path.join(__dirname, '../client/assets'), { maxAge: cacheTime }));
-app.use(express.static(path.join(__dirname, '../client'), { maxAge: 86400000 })); // 1 day for HTML/JS
+// === XSS SANITIZER ===
+app.use((req, res, next) => {
+  const sanitize = (obj) => {
+    if (!obj) return;
+    Object.keys(obj).forEach((key) => {
+      if (typeof obj[key] === 'string') {
+        obj[key] = xss(obj[key]);
+      }
+    });
+  };
+
+  sanitize(req.body);
+  sanitize(req.query);
+  sanitize(req.params);
+
+  next();
+});
+
+// === STATIC FILES ===
+const cacheTime = 31536000000;
+
+app.use(
+  '/assets',
+  express.static(path.join(__dirname, '../client/assets'), {
+    maxAge: cacheTime
+  })
+);
+
+app.use(
+  express.static(path.join(__dirname, '../client'), {
+    maxAge: 86400000
+  })
+);
 
 
-// POST endpoint for new leads
+
+// =====================================
+// EMAIL TEMPLATE
+// =====================================
+function generateWelcomeEmail(name, plan) {
+  return `
+  <div style="font-family:Arial,Helvetica,sans-serif;background:#f4f6fb;padding:40px 20px;">
+  
+    <div style="max-width:600px;margin:auto;background:#ffffff;border-radius:10px;
+    overflow:hidden;box-shadow:0 8px 25px rgba(0,0,0,0.05);">
+
+      <div style="background:#0d1117;padding:25px;text-align:center;">
+        <h1 style="color:#ffffff;margin:0;font-size:22px;">⚡ Autoify</h1>
+      </div>
+
+      <div style="padding:35px 30px;">
+
+        <h2 style="margin-top:0;color:#111;font-size:22px;">
+          Welcome aboard, ${name} 🎉
+        </h2>
+
+        <p style="color:#555;font-size:15px;line-height:1.6;">
+          Your request for the <strong>${plan}</strong> plan has been successfully received.
+        </p>
+
+        <p style="color:#555;font-size:15px;line-height:1.6;">
+          Your automation templates are now ready inside your dashboard.
+        </p>
+
+        <div style="text-align:center;margin:35px 0;">
+          <a href="https://yourdomain.com/dashboard"
+          style="background:#6c63ff;color:#ffffff;padding:14px 28px;border-radius:6px;
+          text-decoration:none;font-weight:bold;font-size:15px;">
+          Open Dashboard
+          </a>
+        </div>
+
+        <p style="color:#555;font-size:14px;">
+          If you need help, simply reply to this email.
+        </p>
+
+        <p style="color:#111;font-size:15px;margin-top:25px;">
+          — The Autoify Team
+        </p>
+
+      </div>
+
+      <div style="background:#f7f7f7;padding:20px;text-align:center;">
+        <p style="margin:0;color:#888;font-size:12px;">
+          © ${new Date().getFullYear()} Autoify. All rights reserved.
+        </p>
+
+        <p style="margin-top:6px;color:#aaa;font-size:12px;">
+          This is an automated system email.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+  `;
+}
+
+
+
+// === LEAD API ===
 app.post('/api/lead', (req, res) => {
+
   const { name, email, phone, message } = req.body;
 
   if (!name || !email) {
@@ -54,68 +151,95 @@ app.post('/api/lead', (req, res) => {
   const selectedPlan = phone;
 
   console.log(`\n--- 🚀 New Subscription Request ---`);
-  console.log(`Name:    ${name}\nEmail:   ${email}\nPlan:    ${selectedPlan}\nMessage: ${message}`);
+  console.log(`Name: ${name}`);
+  console.log(`Email: ${email}`);
+  console.log(`Plan: ${selectedPlan}`);
+  console.log(`Message: ${message}`);
 
-  // 1. Database Operations - Save the Lead
   db.run(
     'INSERT INTO leads (name, email, phone, message) VALUES (?, ?, ?, ?)',
     [name, email, selectedPlan, message],
-    function(err) {
+
+    function (err) {
+
       if (err) {
         console.error('Database error:', err.message);
         return res.status(500).json({ error: 'Failed to process lead correctly.' });
       }
-      
+
       console.log(`✅ User saved securely to DB. (${selectedPlan})`);
 
-      // 2. Trigger Emails (Fire & Forget, let the background take care of it)
       triggerAutomationFlow(name, email, selectedPlan, message).catch(console.error);
 
-      // 3. Immediately respond to UI
-      res.json({ success: true, message: 'Automation loop successfully triggered!' });
+      res.json({
+        success: true,
+        message: 'Automation loop successfully triggered!'
+      });
+
     }
   );
+
 });
 
-// The meat of the automation
+
+
+// === AUTOMATION FLOW ===
 async function triggerAutomationFlow(name, customerEmail, plan, message) {
-  // A. Auto-respond to the customer directly (Dynamic based on selected plan)
+
+  // CUSTOMER EMAIL
   await sendEmail({
+
     to: customerEmail,
+
     subject: `Welcome to Autoify! Your access to ${plan} is confirmed.`,
-    text: `Hi ${name},\n\nYour purchase of ${plan} is complete. You can log into your dashboard using this email to download your templates instantly.`,
-    html: `
-      <div style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;">
-        <div style="max-width: 600px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 8px; border-top: 5px solid #58a6ff;">
-          <h2 style="color: #0d1117;">Welcome to Autoify! ⚡</h2>
-          <p style="font-size: 16px; color: #333;">Hi <strong>${name}</strong>,</p>
-          <p style="font-size: 16px; color: #333;">We successfully received your request for the <strong>${plan}</strong>.</p>
-          <p style="font-size: 16px; color: #333;">Your automation templates are ready to be installed into your workspace.</p>
-          <a href="#" style="background: #bc8cff; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 15px; font-weight: bold;">Access Your Dashboard</a>
-          <hr style="margin-top: 30px; border: none; border-top: 1px solid #eee;" />
-          <p style="color: #888; font-size: 12px;">This is an automated message from your Autoify system.</p>
-        </div>
-      </div>
-    `
+
+    text: `Hi ${name},
+
+Your purchase of ${plan} is confirmed.
+Login to your dashboard to access your automation templates.`,
+
+    html: generateWelcomeEmail(name, plan)
+
   });
 
-  // B. Notify the business owner simultaneously
+
+  // ADMIN EMAIL
   const adminEmail = process.env.ADMIN_EMAIL || 'owner@business.com';
+
   await sendEmail({
-    to: adminEmail, 
+
+    to: adminEmail,
+
     subject: `💰 SALE: New Subscription (${plan})`,
-    text: `A new client has subscribed to Autoify.\n\n--- LEAD DETAILS ---\nName: ${name}\nEmail: ${customerEmail}\nPlan: ${plan}\nMessage: ${message || 'N/A'}\n\nLog in to the dashboard to respond.`,
+
+    text: `A new client has subscribed to Autoify.
+
+--- LEAD DETAILS ---
+Name: ${name}
+Email: ${customerEmail}
+Plan: ${plan}
+Message: ${message || 'N/A'}
+
+Log in to the dashboard to respond.`
+
   });
-  
+
   console.log(`✅ All automated sequences complete!`);
+
 }
 
-// Global hook
+
+
+// === SERVER START ===
 app.listen(PORT, () => {
+
   console.log(`\n================================`);
   console.log(`🎯 Server actively listening!`);
   console.log(`🌍 http://localhost:${PORT}`);
   console.log(`================================`);
+
 }).on('error', (err) => {
+
   console.error('SERVER ERROR:', err.message);
+
 });
